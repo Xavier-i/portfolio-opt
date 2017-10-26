@@ -1,3 +1,4 @@
+load('hist_data_ps2.mat')
 r_p = [1, 1.023, 1.045, 1.13];
 x1 = zeros(1,12);
 x1(1:4) = 1;
@@ -25,6 +26,10 @@ b_bar = A1 * x0;
 w_star = - R_bar\(transpose(Y_bar))*b_bar;
 x_star = x0+ Z2 * w_star
 
-risk = (norm(A1 * x_star)^2)/100
+risk = (norm(Aone * x_star)^2)/100;
+disp('risk is');
+disp(risk);
 
-bias = (norm(A2 * x_star-b))
+bias = (norm(A * x_star-b));
+disp('bias is');
+disp(bias);
