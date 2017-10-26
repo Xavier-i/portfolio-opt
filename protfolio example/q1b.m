@@ -3,23 +3,28 @@ x1 = zeros(1,12);
 x1(1:4) = 1;
 x2 = zeros(1,12);
 x2(10:12) = 1;
+
 r_bar = mean(R,1);
+
 b = [1;0.25;0.2;r_p(1)];%r_P(i) i from 1 to 4
+
 
 A = [ones(1,12);x1; x2;r_bar];% is the A2 matrix in part a
 [m,n]=size(A);
 
 %partition
-%I used these 2 matrices when I tried to directly use Lu method
+
 A1 = A(:,1:m);
-A2 = A(:,m+1:end);  
+A2 = A(:,m+1:end);
 %Lu method find x_0 and Z
 %Can't directly use it since A1 is singular
 [L,U,P]=lu(transpose(A));
-AP = A*P;?
+
+AP = A*P; 
 A1p = AP(:,1:m);
 x1 = A1p\b;
 x0 = transpose(P)*[x1;zeros(n-m,1)];
+%
 
 L1 = L(1:m,:);
 L2 = L(m+1:end,:);
@@ -27,7 +32,6 @@ L2 = L(m+1:end,:);
 Z = transpose(P)*[-transpose(L1)\transpose(L2); eye(n-m)];
 
 % solve w using lu
-
 Aone = r_bar - R;%is tge A1 matrix in part a
 A_bar = Aone*Z;
 b_bar = Aone*x0;
